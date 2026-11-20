@@ -1,0 +1,11 @@
+{
+  "nodes": ["Central Depot", "Regional Hub", "North Hub", "Harborview Hospital"],
+  "source": "Central Depot",
+  "sink": "Harborview Hospital",
+  "edges": [
+    {"from":"Central Depot","to":"Regional Hub","capacity":30},
+    {"from":"Regional Hub","to":"Harborview Hospital","capacity":18},
+    {"from":"Central Depot","to":"North Hub","capacity":20},
+    {"from":"North Hub","to":"Harborview Hospital","capacity":12}
+  ]
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MediFlow | Resource Coordination</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="demo-banner">ACADEMIC DEMO · Synthetic data · Demo role switching is not production authentication</div>
+  <header class="topbar"><a class="brand" href="#">✚ MediFlow</a><div class="top-actions"><span id="currentRole">MediFlow Administrator</span><button class="ghost" id="logoutBtn">Switch portal</button></div></header>
+  <div class="app-shell">
+    <aside class="sidebar"><div class="side-title">WORKSPACE</div><nav id="nav"></nav><div class="side-foot">MediFlow · CIA 3</div></aside>
+    <main class="main">
+      <section id="loginView" class="login-view">
+        <div class="login-card"><div class="eyebrow">MEDICAL RESOURCE NETWORK</div><h1>One network.<br><span>Independent entities.</span></h1><p>Coordinate critical medical resources between hospitals, warehouses, blood banks and logistics teams.</p>
+          <label for="roleSelect">Choose a demonstration portal</label><select id="roleSelect"><option value="MEDIFLOW_ADMIN">MediFlow Administrator</option><option value="HOSPITAL_ADMIN">Hospital Administrator</option><option value="WAREHOUSE_ADMIN">Warehouse Administrator</option><option value="BLOOD_BANK_ADMIN">Blood Bank Administrator</option><option value="LOGISTICS_ADMIN">Logistics Administrator</option></select><button class="primary full" id="enterBtn">Enter demo portal</button>
+          <small>For the academic prototype, portal selection simulates roles locally. Connect a real identity provider and database before production use.</small>
+        </div>
+      </section>
+      <section id="dashboardView" class="hidden">
+        <div class="page-heading"><div><div class="eyebrow" id="pageEyebrow">NETWORK OVERVIEW</div><h1 id="pageTitle">Overview</h1><p id="pageSubtitle">Monitor the medical resource network.</p></div><div class="heading-actions"><span class="status-pill"><i></i> Demo environment</span></div></div>
+        <div id="content"></div>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body></html>

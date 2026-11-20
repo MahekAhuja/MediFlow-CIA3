@@ -1,0 +1,9 @@
+**/target/
+.env
+.DS_Store
+.idea/
+.vscode/
+
+# Ignore generated Java build files
+backend/target/
+
