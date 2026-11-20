@@ -1,70 +1,100 @@
-# MediFlow — CIA 3 Project Source
+# MediFlow – Medical Resource Coordination Platform
 
-This repository contains a plain HTML/CSS/JavaScript demonstration frontend and a Java 17 / Spring Boot API implementing the two algorithms selected for the Advanced Algorithm CIA 3 brief.
+MediFlow is a medical resource coordination platform that demonstrates the use of advanced algorithms for allocating resources and analysing hospital demand.
 
-## Project structure
+**Technologies:** Java, Spring Boot, HTML, CSS, JavaScript, Maven, JUnit.
 
-- `frontend/` — portal-selection demo UI, entity-specific navigation, sample dashboard tables, request form, and algorithm UI calling the Java API.
-- `backend/` — Spring Boot REST API, Edmonds–Karp, Randomized Quickselect, JUnit tests, sample inputs.
+## 1. Prerequisites
 
-## Important scope and honesty note
+- Java JDK 17 or above
+- Apache Maven
+- Web browser (Chrome/Edge)
 
-The frontend portal selector is a local demonstration, not secure authentication. The sample records are synthetic. No database, multi-user authentication, production authorization, or real map provider is included. The map panel is illustrative. Do not describe these as production capabilities.
+## 2. Setup and Run
 
-## Run the Java backend
+**Clone the repository:**
 
-Requirements: JDK 17+ and Maven 3.9+.
+```bash
+git clone https://github.com/MahekAhuja/MediFlow-CIA3.git
+cd MediFlow-CIA3
+```
+
+**Run the backend:**
 
 ```bash
 cd backend
-mvn clean test
 mvn spring-boot:run
 ```
 
-The API starts at `http://localhost:8080`.
+Backend URL: `http://localhost:8080`
 
-Health check: `GET http://localhost:8080/api/health`
+**Run the frontend:**
 
-### Edmonds–Karp
+Open `frontend/index.html` in your browser.
 
-`POST http://localhost:8080/api/algorithms/max-flow`
+## 3. Environment Configuration
+
+- No external API keys are required for the current local setup.
+
+## 4. API Examples
+
+**Edmonds–Karp – Maximum Flow**
+
+`POST /api/algorithms/max-flow`
 
 ```json
 {
-  "nodes": ["Warehouse A", "Hub", "Hospital A"],
-  "source": "Warehouse A",
-  "sink": "Hospital A",
+  "nodes": ["Warehouse", "Hospital"],
+  "source": "Warehouse",
+  "sink": "Hospital",
   "edges": [
-    {"from":"Warehouse A","to":"Hub","capacity":20},
-    {"from":"Hub","to":"Hospital A","capacity":12},
-    {"from":"Warehouse A","to":"Hospital A","capacity":5}
+    {
+      "from": "Warehouse",
+      "to": "Hospital",
+      "capacity": 20
+    }
   ]
 }
 ```
 
-### Randomized Quickselect
+**Randomized Quickselect – Demand Percentile**
 
-`POST http://localhost:8080/api/algorithms/demand-percentile`
+`POST /api/algorithms/demand-percentile`
 
 ```json
-{"demands":[12,18,20,24,30,16,45,22,19,27],"percentile":90,"seed":2026}
+{
+  "demands": [12, 18, 20, 24, 30],
+  "percentile": 90,
+  "seed": 2026
+}
 ```
 
-The implementation uses nearest-rank percentile: `rank = ceil(p*n/100)`, and selects the zero-based element at `rank - 1`. A seed makes the randomized pivot sequence reproducible.
+## 5. Sample Dataset
 
-## Run the frontend
+Sample input files are available in `backend/sample-data/`:
 
-Open `frontend/index.html` in a browser. For best results, serve it locally (for example with VS Code Live Server). Start the backend separately before using the Analytics page. The frontend sends requests to `http://localhost:8080`.
+- `flow-sample.json`
+- `max-flow-request.json`
+- `demand-sample.json`
+- `demand-percentile-request.json`
 
-## Algorithms and complexity
+## 6. Screenshots
 
-- Edmonds–Karp: BFS augmenting paths on a residual graph; `O(V * E^2)` time. It computes maximum flow for a directed capacitated network.
-- Randomized Quickselect: random pivot partition; expected `O(n)` time, worst-case `O(n^2)`; defensive copy requires `O(n)` auxiliary memory in this implementation.
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+## 7. Team Contributions
 
-## Testing and evidence
+- **Mahek:** Edmonds–Karp algorithm and Minimum Cut implementation.
+- **Ruchita:** Randomized Quickselect and demand percentile analysis.
+- **Aayushi:** Frontend development and API integration.
 
-Run `mvn clean test`. Tests cover ordinary, duplicate, boundary, disconnected and invalid-input cases. For the submission evidence, add a benchmark runner with three input sizes and record actual timings from the team's computers. Do not invent benchmark numbers; JVM warm-up and machine conditions affect results.
+## 8. Testing
 
-## Suggested team contribution workflow
+Run the backend tests using:
 
-Use branches and commits for real work only. Each student should make changes they personally implement, review or test, then commit under their own Git identity. Do not fabricate commit history or attribute code to someone who did not create or materially review it.
+```bash
+cd backend
+mvn test
+```
